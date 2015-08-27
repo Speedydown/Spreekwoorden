@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spreekwoorden.Windows", "Sp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spreekwoorden.WindowsPhone", "Spreekwoorden\Spreekwoorden.WindowsPhone\Spreekwoorden.WindowsPhone.csproj", "{96A15804-BCA2-47D6-A131-DC8F281A6C0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreekwoordenLogic", "..\SpreekwoordenLogic\SpreekwoordenLogic.csproj", "{9552F952-6118-4534-9E36-B84A598C032A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCrawlerTools", "..\Speedydown.nl-API\WebCrawlerTools\WebCrawlerTools.csproj", "{EF41C761-8924-40F6-BC70-AF1064796ED2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlControlLibrary", "..\Speedydown.nl-API\XamlControlLibrary\XamlControlLibrary.csproj", "{09F3EFE7-AC3C-4189-90F1-C7BF9E01AF96}"
@@ -20,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreekwoordenBackgroundTaskW", "SpreekwoordenBackgroundTaskW\SpreekwoordenBackgroundTaskW.csproj", "{E4571AE0-41A0-4D96-A5F5-569B72299CD3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WRCHelperLibrary", "..\Speedydown.nl-API\WRCHelperLibrary\WRCHelperLibrary.csproj", "{6F1A5AC4-C4AD-49C8-B37B-C541E09D5742}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreekwoordenLogic", "SpreekwoordenLogic\SpreekwoordenLogic.csproj", "{9552F952-6118-4534-9E36-B84A598C032A}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -82,16 +82,6 @@ Global
 		{96A15804-BCA2-47D6-A131-DC8F281A6C0D}.Release|x86.ActiveCfg = Release|x86
 		{96A15804-BCA2-47D6-A131-DC8F281A6C0D}.Release|x86.Build.0 = Release|x86
 		{96A15804-BCA2-47D6-A131-DC8F281A6C0D}.Release|x86.Deploy.0 = Release|x86
-		{9552F952-6118-4534-9E36-B84A598C032A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9552F952-6118-4534-9E36-B84A598C032A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9552F952-6118-4534-9E36-B84A598C032A}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{9552F952-6118-4534-9E36-B84A598C032A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{9552F952-6118-4534-9E36-B84A598C032A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{9552F952-6118-4534-9E36-B84A598C032A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9552F952-6118-4534-9E36-B84A598C032A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9552F952-6118-4534-9E36-B84A598C032A}.Release|ARM.ActiveCfg = Release|Any CPU
-		{9552F952-6118-4534-9E36-B84A598C032A}.Release|x64.ActiveCfg = Release|Any CPU
-		{9552F952-6118-4534-9E36-B84A598C032A}.Release|x86.ActiveCfg = Release|Any CPU
 		{EF41C761-8924-40F6-BC70-AF1064796ED2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EF41C761-8924-40F6-BC70-AF1064796ED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF41C761-8924-40F6-BC70-AF1064796ED2}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -138,6 +128,16 @@ Global
 		{6F1A5AC4-C4AD-49C8-B37B-C541E09D5742}.Release|ARM.ActiveCfg = Release|Any CPU
 		{6F1A5AC4-C4AD-49C8-B37B-C541E09D5742}.Release|x64.ActiveCfg = Release|Any CPU
 		{6F1A5AC4-C4AD-49C8-B37B-C541E09D5742}.Release|x86.ActiveCfg = Release|Any CPU
+		{9552F952-6118-4534-9E36-B84A598C032A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9552F952-6118-4534-9E36-B84A598C032A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9552F952-6118-4534-9E36-B84A598C032A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9552F952-6118-4534-9E36-B84A598C032A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9552F952-6118-4534-9E36-B84A598C032A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9552F952-6118-4534-9E36-B84A598C032A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9552F952-6118-4534-9E36-B84A598C032A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9552F952-6118-4534-9E36-B84A598C032A}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9552F952-6118-4534-9E36-B84A598C032A}.Release|x64.ActiveCfg = Release|Any CPU
+		{9552F952-6118-4534-9E36-B84A598C032A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

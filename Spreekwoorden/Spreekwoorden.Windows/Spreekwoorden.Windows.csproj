@@ -112,13 +112,13 @@
       <Project>{09f3efe7-ac3c-4189-90f1-c7bf9e01af96}</Project>
       <Name>XamlControlLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\SpreekwoordenLogic\SpreekwoordenLogic.csproj">
-      <Project>{9552f952-6118-4534-9e36-b84a598c032a}</Project>
-      <Name>SpreekwoordenLogic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\SpreekwoordenBackgroundTaskW\SpreekwoordenBackgroundTaskW.csproj">
       <Project>{e4571ae0-41a0-4d96-a5f5-569b72299cd3}</Project>
       <Name>SpreekwoordenBackgroundTaskW</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SpreekwoordenLogic\SpreekwoordenLogic.csproj">
+      <Project>{9552f952-6118-4534-9e36-b84a598c032a}</Project>
+      <Name>SpreekwoordenLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
