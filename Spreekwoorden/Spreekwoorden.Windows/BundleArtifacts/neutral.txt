@@ -1,0 +1,3 @@
+MainPackage=C:\Users\Teake\Documents\GitHub\Spreekwoorden\Spreekwoorden\Spreekwoorden.Windows\bin\Release\Spreekwoorden.Windows_2015.827.2708.0_Bundle\Spreekwoorden.Windows_2015.827.2708.0_AnyCPU.appx
+SymbolPackage=C:\Users\Teake\Documents\GitHub\Spreekwoorden\Spreekwoorden\Spreekwoorden.Windows\AppPackages\Spreekwoorden.Windows_2015.827.2708.0_Test\Spreekwoorden.Windows_2015.827.2708.0_AnyCPU.appxsym
+ResourcePack=C:\Users\Teake\Documents\GitHub\Spreekwoorden\Spreekwoorden\Spreekwoorden.Windows\bin\Release\Spreekwoorden.Windows_2015.827.2708.0_Bundle\Spreekwoorden.Windows_2015.827.2708.0_scale-180.appx

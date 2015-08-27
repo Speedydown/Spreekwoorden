@@ -15,7 +15,10 @@
     <FileAlignment>512</FileAlignment>
     <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Spreekwoorden.Windows_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Spreekwoorden.Windows_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>2681F43CB7676AC25AC8EC9586232F293CEA5F64</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -134,6 +137,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Spreekwoorden.Windows_StoreKey.pfx" />
     <None Include="Spreekwoorden.Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +150,7 @@
     <Content Include="Assets\SmallLogo.targetsize-256.png" />
     <Content Include="Assets\SmallLogo.targetsize-32.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-180.png" />
     <Content Include="Assets\Square310x310Logo.scale-100.jpg" />
     <Content Include="Assets\Square310x310Logo.scale-180.jpg" />
     <Content Include="Assets\Square70x70Logo.scale-100.png" />
@@ -154,6 +159,7 @@
     <Content Include="Assets\StoreLogo.scale-180.png" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-180.png" />
+    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml">

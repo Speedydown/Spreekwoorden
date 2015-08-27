@@ -21,6 +21,11 @@ namespace SpreekwoordenBackgroundTaskW
             
             SpreekwoordenWrapper spreekwoordInstance = await SpreekwoordenWrapper.GetInstance();
 
+            if (!spreekwoordInstance.ChangeLockscreen)
+            {
+                return;
+            }
+
             List<Spreekwoord> spreekwoorden = new List<Spreekwoord>();
 
             if (spreekwoordInstance.SourceIsRandom)

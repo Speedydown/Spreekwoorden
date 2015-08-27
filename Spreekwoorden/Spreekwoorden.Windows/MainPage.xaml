@@ -62,7 +62,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="SearchTextbox" PlaceholderText="Type hier een woord, zin of uitdrukking" HorizontalAlignment="Stretch" KeyDown="TextBox_KeyDown"/>    
+                <TextBox x:Name="SearchTextbox" PlaceholderText="Type hier een woord, zin of uitdrukking" HorizontalAlignment="Stretch" KeyDown="TextBox_KeyDown" Height="34"/>    
                 <Button Grid.Column="1" Content="Zoeken" Click="Button_Click" Width=" 150" />
             </Grid>
             <ScrollViewer Grid.Row="2" VerticalScrollMode="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
