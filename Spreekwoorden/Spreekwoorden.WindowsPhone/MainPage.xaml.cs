@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -13,39 +15,49 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+using WRCHelperLibrary;
 
 namespace Spreekwoorden
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
+        private SpreekwoordenWrapper SpreekwoordInstance = null;
+
         public MainPage()
         {
             this.InitializeComponent();
-
+            Task Loaddata = LoadData();
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            SpreekwoordImage.Source = await Datahandler.GetSpreekwoordenTile();
+            await SpreekwoordInstance.Save();
 
-            // TODO: Prepare page for display here.
+            base.OnNavigatingFrom(e);
+        }
 
-            // TODO: If your application contains multiple pages, ensure that you are
-            // handling the hardware Back button by registering for the
-            // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
-            // If you are using the NavigationHelper provided by some templates,
-            // this event is handled for you.
+        public async Task LoadData()
+        {
+            SpreekwoordInstance = await SpreekwoordenWrapper.GetInstance();
+
+            this.DataContext = SpreekwoordInstance;
+            LoadingControl.SetLoadingStatus(false);
+
+            LoadingControl.DisplayLoadingError(false);
+            LoadingControl.SetLoadingStatus(true);
+
+            await SpreekwoordInstance.GetRandomWoorden();
+
+            LoadingControl.SetLoadingStatus(false);
+
+            if (SpreekwoordInstance.ChangeLockscreen)
+            {
+                NotificationHandler.Run("SpreekwoordenBackgroundTaskW.BackgroundTask", "ImageService", (uint)SpreekwoordInstance.IntervalArray[SpreekwoordInstance.SelectedInterval]);
+            }
+
+            int ID = await Task.Run(() => Datahandler.GetRandomSpreekwoordAndSaveImageToFile());
+            //await LockScreen.SetImageFileAsync(await ApplicationData.Current.LocalFolder.GetFileAsync("Tegeltje" + ID + ".jpg"));
         }
     }
 }

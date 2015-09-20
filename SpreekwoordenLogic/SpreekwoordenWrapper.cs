@@ -38,6 +38,30 @@ namespace SpreekwoordenLogic
             }
         }
 
+        private int _SelectedInterval = 1;
+        public int SelectedInterval
+        {
+            get
+            {
+                return _SelectedInterval;
+            }
+            set
+            {
+                _SelectedInterval = value;
+                RaisePropertyChanged("SelectedInterval");
+            }
+        }
+
+        private int[] _IntervalArray = new int[] { 15, 30, 45, 60, 120 };
+        [JsonIgnore]
+        public int[] IntervalArray
+        {
+            get
+            {
+                return _IntervalArray;
+            }
+        }
+
         private bool _SourceIsRandom;
         public bool SourceIsRandom
         {
@@ -140,10 +164,60 @@ namespace SpreekwoordenLogic
 
         }
 
+        public void SpreekwoordFromYourItemsClick(Spreekwoord spreekwoord)
+        {
+            MyItems.Remove(spreekwoord);
+
+            foreach (Spreekwoord sw in SearchResult)
+            {
+                if (sw.ID == spreekwoord.ID)
+                {
+                    MyItems.Remove(sw);
+                    sw.Notify();
+                    return;
+                }
+            }
+
+            spreekwoord.Notify();
+            Notify();
+        }
+
+        public void SpreekwoordFromSearchGridClick(Spreekwoord spreekwoord)
+        {
+            if (!spreekwoord.IsInList)
+            {
+                foreach (Spreekwoord sw in MyItems)
+                {
+                    if (sw.ID == spreekwoord.ID)
+                    {
+                        return;
+                    }
+                }
+
+                MyItems.Add(spreekwoord);
+                spreekwoord.Notify();
+            }
+            else
+            {
+                MyItems.Remove(spreekwoord);
+                spreekwoord.Notify();
+
+                foreach (Spreekwoord sw in MyItems)
+                {
+                    if (sw.ID == spreekwoord.ID)
+                    {
+                        MyItems.Remove(sw);
+                        return;
+                    }
+                }
+            }
+
+            Notify();
+        }
+
         public void Notify()
         {
             RaisePropertyChanged("MySpreekwoordenTextVisibility");
-            //Task t = Save();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

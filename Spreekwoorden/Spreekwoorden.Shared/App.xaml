@@ -54,5 +54,16 @@
         <SolidColorBrush x:Key="ToggleSwitchTrackPointerOverBackgroundThemeBrush" Color="#FFFFFFFF" />
         <SolidColorBrush x:Key="ToggleSwitchTrackPressedBackgroundThemeBrush" Color="#FFFFFFFF" />
 
+        <!--ComboBox-->
+        <SolidColorBrush x:Key="ComboBoxFocusedBorderThemeBrush" Color="Black" />
+        <SolidColorBrush x:Key="ComboBoxHeaderForegroundThemeBrush" Color="Black" />
+        <SolidColorBrush x:Key="ComboBoxBorderThemeBrush" Color="Black" />
+        <SolidColorBrush x:Key="ComboBoxFocusedForegroundThemeBrush" Color="Black" />
+        <SolidColorBrush x:Key="ComboBoxPointerOverBackgroundThemeBrush" Color="LightGray" />
+        <SolidColorBrush x:Key="ComboBoxPointerOverBorderThemeBrush" Color="Black" />
+        <SolidColorBrush x:Key="ComboBoxPressedBackgroundThemeBrush" Color="#FFFFFFFF" />
+        <SolidColorBrush x:Key="ComboBoxPressedBorderThemeBrush" Color="Black" />
+        <SolidColorBrush x:Key="ComboBoxPressedHighlightThemeBrush" Color="#FFD3D3D3" />
+
     </Application.Resources>
 </Application>

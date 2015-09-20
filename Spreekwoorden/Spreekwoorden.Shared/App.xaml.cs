@@ -119,7 +119,9 @@ namespace Spreekwoorden
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
+
             SpreekwoordenWrapper instance = await SpreekwoordenWrapper.GetInstance();
+
             await instance.Save();
             deferral.Complete();
         }

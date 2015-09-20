@@ -21,7 +21,14 @@ namespace SpreekwoordenLogic
         {
             string Response = await HTTPGetUtil.GetDataAsStringFromURL("http://speedydown-001-site2.smarterasp.net/api.ashx?Spreekwoord=SearchSpreekwoord=" + Query);
 
-            return JsonConvert.DeserializeObject<List<Spreekwoord>>(Response);
+            try
+            {
+                return JsonConvert.DeserializeObject<List<Spreekwoord>>(Response);
+            }
+            catch
+            {
+                return new List<Spreekwoord>();
+            }
         }
 
         public static async Task<IList<Spreekwoord>> GetRandomSpreekwoorden(bool RenderImages = true)
@@ -30,10 +37,17 @@ namespace SpreekwoordenLogic
 
             string Response = await HTTPGetUtil.GetDataAsStringFromURL(URL);
 
-            return JsonConvert.DeserializeObject<List<Spreekwoord>>(Response);
+            try
+            {
+                return JsonConvert.DeserializeObject<List<Spreekwoord>>(Response);
+            }
+            catch
+            {
+                return new List<Spreekwoord>();
+            }
         }
 
-        public static async Task GetSpreekwoordenTile(int ID)
+        private static async Task GetSpreekwoordenTile(int ID)
         {
             string Response = await HTTPGetUtil.GetDataAsStringFromURL("http://speedydown-001-site2.smarterasp.net/api.ashx?Spreekwoord=GenerateSpreekwoord=" + ID);
 
@@ -46,7 +60,6 @@ namespace SpreekwoordenLogic
 
                 using (var stream = await file.OpenAsync(FileAccessMode.ReadWrite))
                 {
-
                     using (var outputStream = stream.GetOutputStreamAt(0))
                     {
                         DataWriter writer = new DataWriter(outputStream);
@@ -56,6 +69,40 @@ namespace SpreekwoordenLogic
                     }
                 }
             }
+        }
+
+        public static async Task<int> GetRandomSpreekwoordAndSaveImageToFile()
+        {
+            SpreekwoordenWrapper spreekwoordInstance = await SpreekwoordenWrapper.GetInstance();
+
+            List<Spreekwoord> spreekwoorden = new List<Spreekwoord>();
+
+            if (!spreekwoordInstance.ChangeLockscreen)
+            {
+                return 0;
+            }
+
+            if (spreekwoordInstance.SourceIsRandom)
+            {
+                spreekwoorden.AddRange(await Datahandler.GetRandomSpreekwoorden(false));
+            }
+
+            if (spreekwoordInstance.SourceIsList)
+            {
+                spreekwoorden.AddRange(spreekwoordInstance.MyItems);
+            }
+
+            if (spreekwoorden.Count == 0)
+            {
+                return 0;
+            }
+
+            Random random = new Random();
+            Spreekwoord s = spreekwoorden[random.Next(0, spreekwoorden.Count)];
+
+            await GetSpreekwoordenTile(s.ID);
+
+            return s.ID;
         }
     }
 }

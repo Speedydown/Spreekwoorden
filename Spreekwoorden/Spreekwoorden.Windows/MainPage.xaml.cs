@@ -36,12 +36,14 @@ namespace Spreekwoorden
         protected async override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             await SpreekwoordInstance.Save();
+
             base.OnNavigatingFrom(e);
         }
 
         public async Task LoadData()
         {
             SpreekwoordInstance = await SpreekwoordenWrapper.GetInstance();
+
             this.DataContext = SpreekwoordInstance;
             LoadingControl.SetLoadingStatus(false);
 
@@ -54,8 +56,11 @@ namespace Spreekwoorden
 
             if (SpreekwoordInstance.ChangeLockscreen)
             {
-                NotificationHandler.Run("SpreekwoordenBackgroundTaskW.BackgroundTask", "ImageService", 60);
+                NotificationHandler.Run("SpreekwoordenBackgroundTaskW.BackgroundTask", "ImageService", (uint)SpreekwoordInstance.IntervalArray[SpreekwoordInstance.SelectedInterval]);
             }
+
+            int ID = await Task.Run(() => Datahandler.GetRandomSpreekwoordAndSaveImageToFile());
+            await LockScreen.SetImageFileAsync(await ApplicationData.Current.LocalFolder.GetFileAsync("Tegeltje" + ID + ".jpg"));
         }
 
         private async void TextBox_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -91,62 +96,30 @@ namespace Spreekwoorden
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Spreekwoord s = e.ClickedItem as Spreekwoord;
-
-            SearchGridSwitch(s);
-        }
-
-        public void SearchGridSwitch(Spreekwoord spreekwoord)
-        {
-            if (!spreekwoord.IsInList)
-            {
-                foreach (Spreekwoord sw in SpreekwoordInstance.MyItems)
-                {
-                    if (sw.ID == spreekwoord.ID)
-                    {
-                        return;
-                    }
-                }
-
-                SpreekwoordInstance.MyItems.Add(spreekwoord);
-                spreekwoord.Notify();
-            }
-            else
-            {
-                SpreekwoordInstance.MyItems.Remove(spreekwoord);
-                spreekwoord.Notify();
-
-                foreach (Spreekwoord sw in SpreekwoordInstance.MyItems)
-                {
-                    if (sw.ID == spreekwoord.ID)
-                    {
-                        SpreekwoordInstance.MyItems.Remove(sw);
-                        return;
-                    }
-                }
-            }
+            SpreekwoordInstance.SpreekwoordFromSearchGridClick(e.ClickedItem as Spreekwoord);
         }
 
         private void GridviewYourItems_ItemClick(object sender, ItemClickEventArgs e)
         {
-            YouritemsSwitch(e.ClickedItem as Spreekwoord);
+            SpreekwoordInstance.SpreekwoordFromYourItemsClick(e.ClickedItem as Spreekwoord);
         }
 
-        public void YouritemsSwitch(Spreekwoord spreekwoord)
+        private async void RandomSpreekwoordenButton_Click(object sender, RoutedEventArgs e)
         {
-            SpreekwoordInstance.MyItems.Remove(spreekwoord);
+            LoadingControl.DisplayLoadingError(false);
+            LoadingControl.SetLoadingStatus(true);
 
-            foreach (Spreekwoord sw in SpreekwoordInstance.SearchResult)
+            await SpreekwoordInstance.GetRandomWoorden();
+
+            LoadingControl.SetLoadingStatus(false);
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SpreekwoordInstance.ChangeLockscreen)
             {
-                if (sw.ID == spreekwoord.ID)
-                {
-                    SpreekwoordInstance.MyItems.Remove(sw);
-                    sw.Notify();
-                    return;
-                }
+                NotificationHandler.Run("SpreekwoordenBackgroundTaskW.BackgroundTask", "ImageService", (uint)SpreekwoordInstance.IntervalArray[SpreekwoordInstance.SelectedInterval]);
             }
-
-            spreekwoord.Notify();
         }
     }
 }

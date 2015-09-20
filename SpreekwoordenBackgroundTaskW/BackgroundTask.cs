@@ -18,36 +18,13 @@ namespace SpreekwoordenBackgroundTaskW
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
-            
-            SpreekwoordenWrapper spreekwoordInstance = await SpreekwoordenWrapper.GetInstance();
 
-            if (!spreekwoordInstance.ChangeLockscreen)
+            int ID = await Datahandler.GetRandomSpreekwoordAndSaveImageToFile();
+
+            if (ID != 0)
             {
-                return;
+                await LockScreen.SetImageFileAsync(await ApplicationData.Current.LocalFolder.GetFileAsync("Tegeltje" + ID + ".jpg"));
             }
-
-            List<Spreekwoord> spreekwoorden = new List<Spreekwoord>();
-
-            if (spreekwoordInstance.SourceIsRandom)
-            {
-                spreekwoorden.AddRange(await Datahandler.GetRandomSpreekwoorden(false));
-            }
-
-            if (spreekwoordInstance.SourceIsList)
-            {
-                spreekwoorden.AddRange(spreekwoordInstance.MyItems);
-            }
-
-            if (spreekwoorden.Count == 0)
-            {
-                return;
-            }
-
-            Random random = new Random();
-            Spreekwoord s = spreekwoorden[random.Next(0, spreekwoorden.Count)];
-
-            await Datahandler.GetSpreekwoordenTile(s.ID);
-            await LockScreen.SetImageFileAsync(await ApplicationData.Current.LocalFolder.GetFileAsync("Tegeltje" +  s.ID + ".jpg"));
 
             deferral.Complete();
         }
