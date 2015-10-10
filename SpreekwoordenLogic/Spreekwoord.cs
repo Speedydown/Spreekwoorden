@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace SpreekwoordenLogic
 {
@@ -47,6 +48,28 @@ namespace SpreekwoordenLogic
                 }
 
                 return false;
+            }
+        }
+
+        public int Width
+        {
+            get
+            {
+                try
+                {
+                    if (Window.Current.Bounds.Width > Window.Current.Bounds.Height)
+                    {
+                        return ((int)Window.Current.Bounds.Height / 2) - 10;
+                    }
+                    else
+                    {
+                        return ((int)Window.Current.Bounds.Width / 2) - 10;
+                    }
+                }
+                catch
+                {
+                    return 0;
+                }
             }
         }
 

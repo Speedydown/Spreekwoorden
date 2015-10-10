@@ -103,6 +103,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\Spreekwoorden.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Speedydown.nl-API\WRCHelperLibrary\WRCHelperLibrary.csproj">
+      <Project>{6f1a5ac4-c4ad-49c8-b37b-c541e09d5742}</Project>
+      <Name>WRCHelperLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Speedydown.nl-API\XamlControlLibrary\XamlControlLibrary.csproj">
+      <Project>{09f3efe7-ac3c-4189-90f1-c7bf9e01af96}</Project>
+      <Name>XamlControlLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SpreekwoordenLogic\SpreekwoordenLogic.csproj">
+      <Project>{9552f952-6118-4534-9e36-b84a598c032a}</Project>
+      <Name>SpreekwoordenLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

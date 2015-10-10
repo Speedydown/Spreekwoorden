@@ -1,0 +1,96 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Spreekwoorden.Styles">
+    
+    <DataTemplate x:Key="SpreekwoordenTile">
+        <Border BorderThickness="1" BorderBrush="Black" Background="White" Width="{Binding Width}" Margin="5,3">
+            <Grid VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ProgressRing Margin="50" IsActive="True" Width="100" Height="100" Background="White"/>
+                <Image Source="{Binding SmallImageURL}" Height="{Binding Width}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,-10, 2, 0"/>
+                <Grid Grid.Row="1" VerticalAlignment="Top" Margin="5,-15,5,-10" Height="80px">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding SpreekWoord}" Foreground="Black" HorizontalAlignment="Left" FontSize="14" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                    <TextBlock Text="{Binding Betekenis}" Foreground="Black" Grid.Row="1" HorizontalAlignment="Left" FontSize="13" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <CheckBox Content="Favoriet" Grid.Row="2" Margin="5,0,0,-10" IsChecked="{Binding IsInList}" VerticalAlignment="Bottom" IsEnabled="False"/>
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <Thickness x:Key="PivotPortraitThemePadding">16,25,0,0</Thickness>
+    <Thickness x:Key="PivotLandscapeThemePadding">16,25,0,0</Thickness>
+    <Style x:Uid="CustomPivotStyle" x:Key="CustomPivotStyle" TargetType="Pivot">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <Grid/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Pivot">
+                    <Grid x:Name="RootElement" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="Orientation">
+                                <VisualState x:Name="Portrait">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotPortraitThemePadding}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Landscape">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotLandscapeThemePadding}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentControl x:Name="TitleContentControl" ContentTemplate="{TemplateBinding TitleTemplate}" Content="{TemplateBinding Title}" Style="{StaticResource PivotTitleContentControlStyle}" FontSize="14"/>
+                        <ScrollViewer x:Name="ScrollViewer" HorizontalSnapPointsAlignment="Center" HorizontalSnapPointsType="MandatorySingle" HorizontalScrollBarVisibility="Hidden" Margin="{TemplateBinding Padding}" Grid.Row="1" Template="{StaticResource ScrollViewerScrollBarlessTemplate}" VerticalSnapPointsType="None" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" VerticalContentAlignment="Stretch" ZoomMode="Disabled">
+                            <PivotPanel x:Name="Panel" VerticalAlignment="Stretch" Background="White">
+                                <PivotHeaderPanel x:Name="Header" Background="LightGray">
+                                    <PivotHeaderPanel.RenderTransform>
+                                        <CompositeTransform x:Name="HeaderTranslateTransform" TranslateX="0"/>
+                                    </PivotHeaderPanel.RenderTransform>
+                                </PivotHeaderPanel>
+                                <ItemsPresenter x:Name="PivotItemPresenter">
+                                    <ItemsPresenter.RenderTransform>
+                                        <TranslateTransform x:Name="ItemsPresenterTranslateTransform" X="0"/>
+                                    </ItemsPresenter.RenderTransform>
+                                </ItemsPresenter>
+                            </PivotPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="CustomPivotItemStyle" TargetType="PivotItem">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+</ResourceDictionary>

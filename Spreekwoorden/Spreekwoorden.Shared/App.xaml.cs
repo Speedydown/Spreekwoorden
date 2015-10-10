@@ -8,7 +8,9 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+#if WINDOWS_APP
 using Windows.UI.ApplicationSettings;
+#endif
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -126,6 +128,7 @@ namespace Spreekwoorden
             deferral.Complete();
         }
 
+#if WINDOWS_APP
         protected override void OnWindowCreated(WindowCreatedEventArgs args)
         {
             base.OnWindowCreated(args);
@@ -143,6 +146,7 @@ namespace Spreekwoorden
             PrivacyPolicy CustomSettingFlyout = new PrivacyPolicy();
             CustomSettingFlyout.Show();
         }
+#endif
     }
 
 }

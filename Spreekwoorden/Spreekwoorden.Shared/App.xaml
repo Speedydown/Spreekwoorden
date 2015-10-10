@@ -65,5 +65,15 @@
         <SolidColorBrush x:Key="ComboBoxPressedBorderThemeBrush" Color="Black" />
         <SolidColorBrush x:Key="ComboBoxPressedHighlightThemeBrush" Color="#FFD3D3D3" />
 
+        <!--Checkbox-->
+        <SolidColorBrush x:Key="CheckBoxBackgroundThemeBrush" Color="White" />
+        <SolidColorBrush x:Key="CheckBoxBorderThemeBrush" Color="black" />
+        <SolidColorBrush x:Key="CheckBoxContentDisabledForegroundThemeBrush" Color="Black" />
+        <SolidColorBrush x:Key="CheckBoxContentForegroundThemeBrush" Color="Black" />
+        <SolidColorBrush x:Key="CheckBoxDisabledBackgroundThemeBrush" Color="White" />
+        <SolidColorBrush x:Key="CheckBoxDisabledBorderThemeBrush" Color="Black" />
+        <SolidColorBrush x:Key="CheckBoxDisabledForegroundThemeBrush" Color="Black" />
+        <SolidColorBrush x:Key="CheckBoxForegroundThemeBrush" Color="Black" />
+
     </Application.Resources>
 </Application>

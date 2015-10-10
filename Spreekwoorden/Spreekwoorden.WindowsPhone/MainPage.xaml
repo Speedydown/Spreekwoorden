@@ -8,7 +8,39 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <Image x:Name="SpreekwoordImage" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
-    </Grid>
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Spreekwoorden.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Pivot x:Name="SpreekwoordenPivot" Title="Spreekwoorden" Style="{StaticResource CustomPivotStyle}">
+        <PivotItem x:Name="MyItems" Margin="-1">
+            <PivotItem.Header>
+                <TextBlock Text="Mijn spreekwoorden" FontSize="21" FontWeight="Bold" Margin="0,5,0,0" />
+            </PivotItem.Header>
+            <ListView ItemsSource="{Binding MyItems}" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemTemplate="{StaticResource SpreekwoordenTile}" HorizontalAlignment="Stretch">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapGrid MaximumRowsOrColumns="10" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </PivotItem>
+        <PivotItem Margin="-1">
+            <PivotItem.Header>
+                <TextBlock Text="Zoeken" FontSize="21" FontWeight="Bold" Margin="0,5,0,0" />
+            </PivotItem.Header>
+            <ListView ItemsSource="{Binding SearchResult}" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemTemplate="{StaticResource SpreekwoordenTile}" HorizontalAlignment="Stretch">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapGrid MaximumRowsOrColumns="10" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+            </ListView>
+        </PivotItem>
+    </Pivot>
 </Page>

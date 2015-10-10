@@ -22,6 +22,7 @@ namespace Spreekwoorden
     public sealed partial class MainPage : Page
     {
         private SpreekwoordenWrapper SpreekwoordInstance = null;
+        private PivotItem MyItemsPivotItem = null;
 
         public MainPage()
         {
@@ -41,23 +42,46 @@ namespace Spreekwoorden
         {
             SpreekwoordInstance = await SpreekwoordenWrapper.GetInstance();
 
-            this.DataContext = SpreekwoordInstance;
-            LoadingControl.SetLoadingStatus(false);
+            MyItemsPivotItem = MyItems;
 
-            LoadingControl.DisplayLoadingError(false);
-            LoadingControl.SetLoadingStatus(true);
+            if (SpreekwoordInstance.MyItems.Count == 0)
+            {
+                SpreekwoordenPivot.Items.Remove(MyItems);
+            }
+
+            this.DataContext = SpreekwoordInstance;
+            //LoadingControl.SetLoadingStatus(false);
+
+            //LoadingControl.DisplayLoadingError(false);
+            //LoadingControl.SetLoadingStatus(true);
 
             await SpreekwoordInstance.GetRandomWoorden();
 
-            LoadingControl.SetLoadingStatus(false);
+            //LoadingControl.SetLoadingStatus(false);
 
             if (SpreekwoordInstance.ChangeLockscreen)
             {
-                NotificationHandler.Run("SpreekwoordenBackgroundTaskW.BackgroundTask", "ImageService", (uint)SpreekwoordInstance.IntervalArray[SpreekwoordInstance.SelectedInterval]);
+                //NotificationHandler.Run("SpreekwoordenBackgroundTaskW.BackgroundTask", "ImageService", (uint)SpreekwoordInstance.IntervalArray[SpreekwoordInstance.SelectedInterval]);
             }
 
             int ID = await Task.Run(() => Datahandler.GetRandomSpreekwoordAndSaveImageToFile());
             //await LockScreen.SetImageFileAsync(await ApplicationData.Current.LocalFolder.GetFileAsync("Tegeltje" + ID + ".jpg"));
         }
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            SpreekwoordInstance.SpreekwoordFromSearchGridClick(e.ClickedItem as Spreekwoord);
+
+            if (SpreekwoordInstance.MyItems.Count == 0)
+            {
+                SpreekwoordenPivot.Items.Remove(MyItems);
+            }
+            else if (!SpreekwoordenPivot.Items.Contains(MyItems))
+            {
+                SpreekwoordenPivot.Items.Add(MyItems);
+            }
+        }
+
+        
     }
 }
