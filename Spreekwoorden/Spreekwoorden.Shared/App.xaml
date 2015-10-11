@@ -55,6 +55,8 @@
         <SolidColorBrush x:Key="ToggleSwitchTrackPressedBackgroundThemeBrush" Color="#FFFFFFFF" />
 
         <!--ComboBox-->
+
+        <SolidColorBrush x:Key="ComboBoxForegroundThemeBrush" Color="Black" />
         <SolidColorBrush x:Key="ComboBoxFocusedBorderThemeBrush" Color="Black" />
         <SolidColorBrush x:Key="ComboBoxHeaderForegroundThemeBrush" Color="Black" />
         <SolidColorBrush x:Key="ComboBoxBorderThemeBrush" Color="Black" />

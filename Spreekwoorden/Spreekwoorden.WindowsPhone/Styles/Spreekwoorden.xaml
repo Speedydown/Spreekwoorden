@@ -4,22 +4,22 @@
     xmlns:local="using:Spreekwoorden.Styles">
     
     <DataTemplate x:Key="SpreekwoordenTile">
-        <Border BorderThickness="1" BorderBrush="Black" Background="White" Width="{Binding Width}" Margin="5,3">
+        <Border BorderThickness="1" BorderBrush="Black" Background="White" Width="{Binding Width}" Margin="2,3">
             <Grid VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <ProgressRing Margin="50" IsActive="True" Width="100" Height="100" Background="White"/>
-                <Image Source="{Binding SmallImageURL}" Height="{Binding Width}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,-10, 2, 0"/>
-                <Grid Grid.Row="1" VerticalAlignment="Top" Margin="5,-15,5,-10" Height="80px">
+                <ProgressRing Margin="25" IsActive="True" Width="135" Height="135" Background="White"/>
+                <Image Source="{Binding SmallImageURL}" Height="{Binding Width}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,-2, 2, 0"/>
+                <Grid Grid.Row="1" VerticalAlignment="Top" Margin="5,-7,5,-10" Height="80px">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="{Binding SpreekWoord}" Foreground="Black" HorizontalAlignment="Left" FontSize="14" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
-                    <TextBlock Text="{Binding Betekenis}" Foreground="Black" Grid.Row="1" HorizontalAlignment="Left" FontSize="13" TextWrapping="WrapWholeWords"/>
+                    <TextBlock Text="{Binding Betekenis}" Foreground="Black" Grid.Row="1" HorizontalAlignment="Left" FontSize="12" TextWrapping="WrapWholeWords" Canvas.ZIndex="3"/>
                 </Grid>
                 <CheckBox Content="Favoriet" Grid.Row="2" Margin="5,0,0,-10" IsChecked="{Binding IsInList}" VerticalAlignment="Bottom" IsEnabled="False"/>
             </Grid>

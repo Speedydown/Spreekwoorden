@@ -5,6 +5,7 @@
     xmlns:local="using:Spreekwoorden"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="using:XamlControlLibrary"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -16,31 +17,47 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Pivot x:Name="SpreekwoordenPivot" Title="Spreekwoorden" Style="{StaticResource CustomPivotStyle}">
+    <Pivot x:Name="SpreekwoordenPivot" Style="{StaticResource CustomPivotStyle}">
+        <PivotItem x:Name="SeachPivot" Margin="-1">
+            <PivotItem.Header>
+                <TextBlock Text="Zoeken" FontSize="21" FontWeight="Bold" Margin="0,5,0,0" />
+            </PivotItem.Header>
+            <Grid VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Controls:LoadingControl x:Name="LoadingControl" TextColor="Black" Grid.Row="1" LoadingText="Laden..." ErrorText="Er is iets mis gegaan :(" ErrorSubText="Is er wel internet?" />
+                <TextBox x:Name="SearchTextbox" Margin="10,5,5,5" PlaceholderText="Zoekterm..." KeyDown="TextBox_KeyDown"/>
+                <ListView ItemsSource="{Binding SearchResult}" Grid.Row="1" Margin="8,0,2,0" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemTemplate="{StaticResource SpreekwoordenTile}" HorizontalAlignment="Stretch">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapGrid MaximumRowsOrColumns="10" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+            </Grid>
+        </PivotItem>
         <PivotItem x:Name="MyItems" Margin="-1">
             <PivotItem.Header>
                 <TextBlock Text="Mijn spreekwoorden" FontSize="21" FontWeight="Bold" Margin="0,5,0,0" />
             </PivotItem.Header>
-            <ListView ItemsSource="{Binding MyItems}" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemTemplate="{StaticResource SpreekwoordenTile}" HorizontalAlignment="Stretch">
+            <ListView ItemsSource="{Binding MyItems}" Margin="8,0,2,0" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemTemplate="{StaticResource SpreekwoordenTile}" HorizontalAlignment="Stretch">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapGrid MaximumRowsOrColumns="10" Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
-            </ListView>
-        </PivotItem>
-        <PivotItem Margin="-1">
-            <PivotItem.Header>
-                <TextBlock Text="Zoeken" FontSize="21" FontWeight="Bold" Margin="0,5,0,0" />
-            </PivotItem.Header>
-            <ListView ItemsSource="{Binding SearchResult}" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemTemplate="{StaticResource SpreekwoordenTile}" HorizontalAlignment="Stretch">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapGrid MaximumRowsOrColumns="10" Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-
             </ListView>
         </PivotItem>
     </Pivot>
+    <Page.BottomAppBar>
+        <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Foreground="White">
+            <AppBarButton x:Uid="ReloadButton" x:Name="ReloadButton" Label="Willekeurig" Icon="Refresh" Click="ReloadButton_Click" />
+            <AppBarButton x:Uid="SearchButton" x:Name="SearchButton" Label="Zoeken" Icon="Find" Click="SearchButton_Click" />
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="PrivacyPolicyButton" x:Name="PrivacyPolicyButton" Label="Privacy policy"  Click="PrivacyButton_Click"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

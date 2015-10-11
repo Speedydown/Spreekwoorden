@@ -17,6 +17,8 @@ namespace SpreekwoordenLogic
 {
     public static class Datahandler
     {
+        private static Random Randomizer = new Random();
+
         public static async Task<IList<Spreekwoord>> GetSpreekwoordenBySearchQuery(string Query)
         {
             string Response = await HTTPGetUtil.GetDataAsStringFromURL("http://speedydown-001-site2.smarterasp.net/api.ashx?Spreekwoord=SearchSpreekwoord=" + Query);
@@ -33,7 +35,7 @@ namespace SpreekwoordenLogic
 
         public static async Task<IList<Spreekwoord>> GetRandomSpreekwoorden(bool RenderImages = true)
         {
-            string URL = "http://speedydown-001-site2.smarterasp.net/api.ashx?Spreekwoord=GetRandomSpreekwoorden=" + RenderImages;
+            string URL = "http://speedydown-001-site2.smarterasp.net/api.ashx?Spreekwoord=GetRandomSpreekwoorden=" + RenderImages + "&Random=" + Randomizer.Next(0, 1000000);
 
             string Response = await HTTPGetUtil.GetDataAsStringFromURL(URL);
 
