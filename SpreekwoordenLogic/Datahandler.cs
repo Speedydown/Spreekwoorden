@@ -35,7 +35,7 @@ namespace SpreekwoordenLogic
 
         public static async Task<IList<Spreekwoord>> GetRandomSpreekwoorden(bool RenderImages = true)
         {
-            string URL = "http://speedydown-001-site2.smarterasp.net/api.ashx?Spreekwoord=GetRandomSpreekwoorden=" + RenderImages + "&Random=" + Randomizer.Next(0, 1000000);
+            string URL = "http://speedydown-001-site2.smarterasp.net/api.ashx?Spreekwoord=GetRandomSpreekwoorden=" + RenderImages.ToString().ToLower() + "&Random=" + Randomizer.Next(0, 1000000);
 
             string Response = await HTTPGetUtil.GetDataAsStringFromURL(URL);
 
