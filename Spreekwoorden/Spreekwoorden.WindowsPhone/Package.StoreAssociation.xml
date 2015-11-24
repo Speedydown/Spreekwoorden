@@ -203,6 +203,8 @@
     <Language Code="ky-kg" InMinimumRequirementSet="true" />
     <Language Code="lb" InMinimumRequirementSet="true" />
     <Language Code="lb-lu" InMinimumRequirementSet="true" />
+    <Language Code="lo" InMinimumRequirementSet="true" />
+    <Language Code="lo-la" InMinimumRequirementSet="true" />
     <Language Code="lt" InMinimumRequirementSet="true" />
     <Language Code="lt-lt" InMinimumRequirementSet="true" />
     <Language Code="lv" InMinimumRequirementSet="true" />
@@ -368,13 +370,22 @@
     <MainPackageIdentityName>52891Speedydown.CardMarket</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.HVZeeland</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.Joop</MainPackageIdentityName>
-    <MainPackageIdentityName>52891Speedydown.LeeuwarderCourant</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.leftovers</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.PowNed</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.Supermarktaanbiedingen</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.Wldnet</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.WieZitWaar</MainPackageIdentityName>
-    <MainPackageIdentityName>52891Speedydown.WieZitWaarVandaag</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH628HC" />
+  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH628HC">
+    <PackageInfo>
+      <OsMinVersion>6.3.1.0</OsMinVersion>
+      <PackageArchitecture>Neutral</PackageArchitecture>
+      <PackageMaxArchitectureVersion>1.1.0.0</PackageMaxArchitectureVersion>
+    </PackageInfo>
+    <PackageInfo>
+      <OsMinVersion>6.3.1.0</OsMinVersion>
+      <PackageArchitecture>Neutral</PackageArchitecture>
+      <PackageMaxArchitectureVersion>1.1.0.0</PackageMaxArchitectureVersion>
+    </PackageInfo>
+  </PackageInfoList>
 </StoreAssociation>

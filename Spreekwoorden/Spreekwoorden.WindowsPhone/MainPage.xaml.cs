@@ -5,9 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -15,6 +18,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using WRCHelperLibrary;
 
@@ -24,6 +28,7 @@ namespace Spreekwoorden
     {
         private SpreekwoordenWrapper SpreekwoordInstance = null;
         private PivotItem MyItemsPivotItem = null;
+        private Spreekwoord SharedSpreekwoord = null;
 
         public MainPage()
         {
@@ -161,6 +166,56 @@ namespace Spreekwoorden
             await SpreekwoordInstance.GetRandomWoorden();
 
             LoadingControl.SetLoadingStatus(false);
+        }
+
+        private void ListView_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            if (e.HoldingState == Windows.UI.Input.HoldingState.Completed)
+            {
+                SharedSpreekwoord = (sender as Border).DataContext as Spreekwoord;
+                //SharedStream =  RandomAccessStreamReference.CreateFromUri(new Uri(SharedSpreekwoord.SmallImageURL));
+
+                DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
+                dataTransferManager.DataRequested += new TypedEventHandler<DataTransferManager,
+                    DataRequestedEventArgs>(this.ShareImageHandler);
+                DataTransferManager.ShowShareUI();
+            }
+        }
+
+        private async void ShareImageHandler(DataTransferManager sender, DataRequestedEventArgs e)
+        {
+            if (SharedSpreekwoord != null)
+            {
+                DataRequest request = e.Request;
+                request.Data.Properties.Title = SharedSpreekwoord.SpreekWoord;
+                request.Data.Properties.Description = "Spreekwoord van Spreekwoorden voor Windows Phone";
+
+                // Because we are making async calls in the DataRequested event handler,
+                //  we need to get the deferral first.
+                DataRequestDeferral deferral = request.GetDeferral();
+
+                StorageFile ImageFile = null;
+
+                // Make sure we always call Complete on the deferral.
+                try
+                {
+                    ImageFile = await Datahandler.GetSmallSpreekwoordenTile(SharedSpreekwoord.ID);
+                }
+                catch
+                {
+                    e.Request.FailWithDisplayText("Spreekwoord kan niet worden gedeeld :(");
+                }
+
+                try
+                {
+                    request.Data.SetBitmap(RandomAccessStreamReference.CreateFromFile(ImageFile));
+                }
+                finally
+                {
+                    deferral.Complete();
+                }
+
+            }
         }
     }
 }

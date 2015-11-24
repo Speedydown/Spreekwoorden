@@ -73,6 +73,30 @@ namespace SpreekwoordenLogic
             }
         }
 
+        public static async Task<StorageFile> GetSmallSpreekwoordenTile(int ID)
+        {
+            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Tegeltje" + ID + ".jpg", CreationCollisionOption.ReplaceExisting);
+            {
+                string url = "http://speedydown-001-site2.smarterasp.net/Spreekwoorden/Images/Small/" + ID + ".jpg";
+                HttpClient client = new HttpClient();
+
+                byte[] responseBytes = await client.GetByteArrayAsync(url);
+
+                using (var stream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    using (var outputStream = stream.GetOutputStreamAt(0))
+                    {
+                        DataWriter writer = new DataWriter(outputStream);
+                        writer.WriteBytes(responseBytes);
+                        await writer.StoreAsync();
+                        await outputStream.FlushAsync();
+                    }
+                }
+            }
+
+            return file;
+        }
+
         public static async Task<int> GetRandomSpreekwoordAndSaveImageToFile()
         {
             SpreekwoordenWrapper spreekwoordInstance = await SpreekwoordenWrapper.GetInstance();

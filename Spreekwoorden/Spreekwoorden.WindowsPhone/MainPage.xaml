@@ -26,29 +26,90 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Controls:LoadingControl x:Name="LoadingControl" TextColor="Black" Grid.Row="1" LoadingText="Laden..." ErrorText="Er is iets mis gegaan :(" ErrorSubText="Is er wel internet?" />
                 <TextBox x:Name="SearchTextbox" Margin="10,5,5,5" PlaceholderText="Zoekterm..." KeyDown="TextBox_KeyDown"/>
-                <ListView ItemsSource="{Binding SearchResult}" Grid.Row="1" Margin="8,0,2,0" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemTemplate="{StaticResource SpreekwoordenTile}" HorizontalAlignment="Stretch">
+                <ListView x:Name="SearchListview" ItemsSource="{Binding SearchResult}" Grid.Row="1" Margin="8,0,2,0" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" HorizontalAlignment="Stretch">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapGrid MaximumRowsOrColumns="10" Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" Holding="ListView_Holding" BorderBrush="Black" Background="White" Width="{Binding Width}" Margin="2,3">
+                                <Grid VerticalAlignment="Top">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <ProgressRing Margin="25" IsActive="True" Width="135" Height="135" Background="White"/>
+                                    <Image Source="{Binding SmallImageURL}" Height="{Binding Width}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,-2, 2, 0"/>
+                                    <Grid Grid.Row="1" VerticalAlignment="Top" Margin="5,-7,5,-10" Height="80px">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding SpreekWoord}" Foreground="Black" HorizontalAlignment="Left" FontSize="14" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Text="{Binding Betekenis}" Foreground="Black" Grid.Row="1" HorizontalAlignment="Left" FontSize="12" TextWrapping="WrapWholeWords" Canvas.ZIndex="3"/>
+                                    </Grid>
+                                    <CheckBox Content="Favoriet" Grid.Row="2" Margin="5,0,0,-10" IsChecked="{Binding IsInList}" VerticalAlignment="Bottom" IsEnabled="False"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
+                <Grid Background="LightGray" Grid.Row="2">
+                    <TextBlock Text="Je kunt een spreekwoord delen met een andere app door hem langer in te houden!" Foreground="Black" HorizontalAlignment="Center" FontSize="9" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                </Grid>
             </Grid>
         </PivotItem>
         <PivotItem x:Name="MyItems" Margin="-1">
             <PivotItem.Header>
                 <TextBlock Text="Mijn spreekwoorden" FontSize="21" FontWeight="Bold" Margin="0,5,0,0" />
             </PivotItem.Header>
-            <ListView ItemsSource="{Binding MyItems}" Margin="8,0,2,0" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemTemplate="{StaticResource SpreekwoordenTile}" HorizontalAlignment="Stretch">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapGrid MaximumRowsOrColumns="10" Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ListView ItemsSource="{Binding MyItems}" Margin="8,0,2,0" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" HorizontalAlignment="Stretch">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapGrid MaximumRowsOrColumns="10" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" Holding="ListView_Holding" BorderBrush="Black" Background="White" Width="{Binding Width}" Margin="2,3">
+                                <Grid VerticalAlignment="Top">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <ProgressRing Margin="25" IsActive="True" Width="135" Height="135" Background="White"/>
+                                    <Image Source="{Binding SmallImageURL}" Height="{Binding Width}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,-2, 2, 0"/>
+                                    <Grid Grid.Row="1" VerticalAlignment="Top" Margin="5,-7,5,-10" Height="80px">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding SpreekWoord}" Foreground="Black" HorizontalAlignment="Left" FontSize="14" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Text="{Binding Betekenis}" Foreground="Black" Grid.Row="1" HorizontalAlignment="Left" FontSize="12" TextWrapping="WrapWholeWords" Canvas.ZIndex="3"/>
+                                    </Grid>
+                                    <CheckBox Content="Favoriet" Grid.Row="2" Margin="5,0,0,-10" IsChecked="{Binding IsInList}" VerticalAlignment="Bottom" IsEnabled="False"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Grid Background="LightGray" Grid.Row="2">
+                    <TextBlock Text="Je kunt een spreekwoord delen met een andere app door hem langer in te houden!" Foreground="Black" HorizontalAlignment="Center" FontSize="9" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                </Grid>
+            </Grid>
         </PivotItem>
     </Pivot>
     <Page.BottomAppBar>

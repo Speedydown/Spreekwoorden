@@ -5,7 +5,7 @@
     
     <DataTemplate x:Key="SpreekwoordenTile">
         <Border BorderThickness="1" BorderBrush="Black" Background="White" Width="{Binding Width}" Margin="2,3">
-            <Grid VerticalAlignment="Top">
+            <Grid VerticalAlignment="Top" Holding="ListView_Holding">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
