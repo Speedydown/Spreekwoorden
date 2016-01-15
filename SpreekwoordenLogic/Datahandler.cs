@@ -53,7 +53,7 @@ namespace SpreekwoordenLogic
         {
             string Response = await HTTPGetUtil.GetDataAsStringFromURL("http://speedydown-001-site2.smarterasp.net/api.ashx?Spreekwoord=GenerateSpreekwoord=" + ID);
 
-            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Tegeltje" + ID + ".jpg", CreationCollisionOption.ReplaceExisting);
+            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Tegeltje.jpg", CreationCollisionOption.ReplaceExisting);
             {
                 string url = "http://speedydown-001-site2.smarterasp.net/Spreekwoorden/Images/" + ID + ".jpg";
                 HttpClient client = new HttpClient();

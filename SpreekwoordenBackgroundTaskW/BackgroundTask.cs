@@ -23,7 +23,7 @@ namespace SpreekwoordenBackgroundTaskW
 
             if (ID != 0)
             {
-                await LockScreen.SetImageFileAsync(await ApplicationData.Current.LocalFolder.GetFileAsync("Tegeltje" + ID + ".jpg"));
+                await LockScreen.SetImageFileAsync(await ApplicationData.Current.LocalFolder.GetFileAsync("Tegeltje.jpg"));
             }
 
             deferral.Complete();

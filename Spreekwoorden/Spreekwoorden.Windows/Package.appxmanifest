@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="52891Speedydown.SpreekwoordenApp" Publisher="CN=66C50CC1-FBB4-401C-87F4-C13E4975CFAE" Version="2015.920.2343.0" />
+  <Identity Name="52891Speedydown.SpreekwoordenApp" Publisher="CN=66C50CC1-FBB4-401C-87F4-C13E4975CFAE" Version="2016.115.2119.0" />
   <Properties>
     <DisplayName>Spreekwoorden App</DisplayName>
     <PublisherDisplayName>Speedydown</PublisherDisplayName>
@@ -26,7 +26,6 @@
         <m2:ApplicationView MinWidth="width320" />
       </m2:VisualElements>
       <Extensions>
-	    <Extension ExtensionName="LockScreen_Background" ConsumerID="{111DFF24-AA15-4A96-8006-2BFF8122084F}" TaskID="_default" />
         <Extension Category="windows.backgroundTasks" EntryPoint="SpreekwoordenBackgroundTaskW.BackgroundTask">
           <BackgroundTasks>
             <Task Type="timer" />
