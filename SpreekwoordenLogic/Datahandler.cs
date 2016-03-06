@@ -21,7 +21,7 @@ namespace SpreekwoordenLogic
 
         public static async Task<IList<Spreekwoord>> GetSpreekwoordenBySearchQuery(string Query)
         {
-            string Response = await HTTPGetUtil.GetDataAsStringFromURL("http://speedydown-001-site2.smarterasp.net/api.ashx?Spreekwoord=SearchSpreekwoord=" + Query);
+            string Response = await HTTPGetUtil.GetDataAsStringFromURL("http://win10apps.nl/API/Spreekwoorden/GetSpreekwoorden/" + Query);
 
             try
             {
@@ -33,9 +33,9 @@ namespace SpreekwoordenLogic
             }
         }
 
-        public static async Task<IList<Spreekwoord>> GetRandomSpreekwoorden(bool RenderImages = true)
+        public static async Task<IList<Spreekwoord>> GetRandomSpreekwoorden()
         {
-            string URL = "http://speedydown-001-site2.smarterasp.net/api.ashx?Spreekwoord=GetRandomSpreekwoorden=" + RenderImages.ToString().ToLower() + "&Random=" + Randomizer.Next(0, 1000000);
+            string URL = "http://win10apps.nl/API/Spreekwoorden/GetSpreekwoorden/?random=" + Randomizer.Next(0, 1000000);
 
             string Response = await HTTPGetUtil.GetDataAsStringFromURL(URL);
 
@@ -51,11 +51,9 @@ namespace SpreekwoordenLogic
 
         private static async Task GetSpreekwoordenTile(int ID)
         {
-            string Response = await HTTPGetUtil.GetDataAsStringFromURL("http://speedydown-001-site2.smarterasp.net/api.ashx?Spreekwoord=GenerateSpreekwoord=" + ID);
-
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Tegeltje.jpg", CreationCollisionOption.ReplaceExisting);
             {
-                string url = "http://speedydown-001-site2.smarterasp.net/Spreekwoorden/Images/" + ID + ".jpg";
+                string url = "http://win10apps.nl/API/Spreekwoorden/GetwallPaper/" + ID;
                 HttpClient client = new HttpClient();
 
                 byte[] responseBytes = await client.GetByteArrayAsync(url);
@@ -77,7 +75,7 @@ namespace SpreekwoordenLogic
         {
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Tegeltje" + ID + ".jpg", CreationCollisionOption.ReplaceExisting);
             {
-                string url = "http://speedydown-001-site2.smarterasp.net/Spreekwoorden/Images/Small/" + ID + ".jpg";
+                string url = "http://win10apps.nl/API/Spreekwoorden/GetSmallSpreekwoordenTile/" + ID;
                 HttpClient client = new HttpClient();
 
                 byte[] responseBytes = await client.GetByteArrayAsync(url);
@@ -110,7 +108,7 @@ namespace SpreekwoordenLogic
 
             if (spreekwoordInstance.SourceIsRandom)
             {
-                spreekwoorden.AddRange(await Datahandler.GetRandomSpreekwoorden(false));
+                spreekwoorden.AddRange(await Datahandler.GetRandomSpreekwoorden());
             }
 
             if (spreekwoordInstance.SourceIsList)

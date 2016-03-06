@@ -385,12 +385,12 @@
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.920.2343.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2016.115.2119.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.920.2343.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2016.115.2119.0</PackageMaxArchitectureVersion>
       </PackageInfo>
     </BundleInfo>
   </PackageInfoList>

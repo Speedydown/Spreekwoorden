@@ -10,7 +10,7 @@ namespace SpreekwoordenLogic
 {
     public class Spreekwoord : INotifyPropertyChanged
     {
-        private const string Server = "http://speedydown-001-site2.smarterasp.net/Spreekwoorden/Images/";
+        private const string Server = "http://win10apps.nl/API/Spreekwoorden/";
 
         public int ID { get; private set; }
         public string SpreekWoord { get; private set; }
@@ -19,14 +19,14 @@ namespace SpreekwoordenLogic
         {
             get
             {
-                return Server + ID + ".jpg";
+                return Server + "GetwallPaper/" + ID;
             }
         }
         public string SmallImageURL
         {
             get
             {
-                return Server + "Small/" + ID + ".jpg";
+                return "http://win10apps.nl/spreekwoorden/images/small/" + ID + ".jpg";
             }
         }
 
